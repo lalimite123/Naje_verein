@@ -4,11 +4,11 @@ import { WorldMap } from "@/components/ui/world-map"
 import { motion } from "framer-motion"
 
 export function WorldMapDemo() {
-  const values = ["Justice", "Droits humains", "Diversité", "Solidarité", "Développement durable"]
+  const values = ["Gerechtigkeit", "Menschenrechte", "Vielfalt", "Solidarität", "Nachhaltige Entwicklung"]
   return (
     <div className="py-28 w-full bg-gradient-to-b from-white via-gray-50 to-white dark:from-black dark:via-neutral-900 dark:to-black">
       <div className="max-w-7xl mx-auto text-center px-4">
-        <p className="font-light text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">Nos valeurs</p>
+        <p className="font-light text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">Unsere Werte</p>
         <p className="font-semibold text-xl md:text-2xl text-red-600 mb-4">
           {values.map((word, idx) => (
             <motion.span
@@ -23,13 +23,13 @@ export function WorldMapDemo() {
           ))}
         </p>
         <p className="text-sm md:text-lg text-gray-600 dark:text-neutral-300 max-w-2xl mx-auto">
-          Nous agissons pour la justice sociale, la défense des droits humains, le dialogue interculturel et un développement durable au service des communautés.
+          Wir setzen uns für soziale Gerechtigkeit, Menschenrechte, interkulturellen Dialog und nachhaltige Entwicklung im Dienst der Gemeinschaften ein.
         </p>
         <div className="flex flex-wrap justify-center gap-2 py-6">
-          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Interculturalité</span>
-          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Égalité</span>
-          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Participation citoyenne</span>
-          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Solidarité internationale</span>
+          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Interkulturalität</span>
+          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Gleichheit</span>
+          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Bürgerbeteiligung</span>
+          <span className="px-3 py-1 rounded-full border border-red-200 bg-red-50 text-red-700 text-sm">Internationale Solidarität</span>
         </div>
       </div>
       <WorldMap

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { DonationModal } from "./donation-modal"
 import { ActivitiesSection } from "./activities-section"
+import { ProgramsSection } from "./programs-section"
 import { ContactSection } from "./contact-section"
 import { HeroSection } from "./hero-section"
 import { WorkAreasSection } from "./work-areas-section"
@@ -55,6 +56,11 @@ export function Hero() {
 
       <section className="bg-white/90">
         <HeroSection onScrollToWork={scrollToWork} onOpenDonation={() => setIsDonationOpen(true)} />
+      </section>
+
+      <div className="border-t border-gray-200" />
+      <section className="bg-white">
+        <ProgramsSection />
       </section>
 
       <div className="border-t border-gray-200" />

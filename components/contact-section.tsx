@@ -6,6 +6,7 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import SphereImageGrid, { ImageData } from "@/components/image-sphere"
 
@@ -33,9 +34,22 @@ export function ContactSection() {
     return () => window.removeEventListener("resize", update)
   }, [])
 
-  const onSubmit = (values: ContactValues) => {
-    toast({ title: "Nachricht gesendet", description: "Wir melden uns bald bei Ihnen." })
-    form.reset()
+  const onSubmit = async (values: ContactValues) => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data?.error || "send_failed")
+      }
+      toast({ title: "Nachricht gesendet", description: "Wir melden uns bald bei Ihnen." })
+      form.reset()
+    } catch (err: any) {
+      toast({ title: "Fehler", description: "Senden fehlgeschlagen. Bitte versuchen Sie es erneut." })
+    }
   }
 
   const BASE_IMAGES: Omit<ImageData, "id">[] = [
@@ -185,7 +199,9 @@ export function ContactSection() {
                 />
 
                 <div className="flex justify-end">
-                  <Button type="submit" className="bg-red-600 text-white hover:bg-red-700">Senden</Button>
+                  <Button type="submit" className="bg-red-600 text-white hover:bg-red-700" disabled={form.formState.isSubmitting}>
+                    {form.formState.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Senden
+                  </Button>
                 </div>
               </form>
             </div>

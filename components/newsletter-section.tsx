@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
 type NewsletterValues = {
@@ -17,9 +18,22 @@ export function NewsletterSection() {
     mode: "onBlur",
   })
 
-  const onSubmit = (values: NewsletterValues) => {
-    toast({ title: "Erfolgreich abonniert", description: "Vielen Dank! Wir halten Sie auf dem Laufenden." })
-    form.reset()
+  const onSubmit = async (values: NewsletterValues) => {
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data?.error || "subscribe_failed")
+      }
+      toast({ title: "Erfolgreich abonniert", description: "Bitte bestätigen Sie Ihre Anmeldung per E-Mail." })
+      form.reset()
+    } catch (err: any) {
+      toast({ title: "Fehler", description: "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut." })
+    }
   }
 
   return (
@@ -69,7 +83,9 @@ export function NewsletterSection() {
             />
 
             <div className="md:col-span-1 flex items-end">
-              <Button type="submit" className="w-full bg-red-600 text-white hover:bg-red-700">Abonnieren</Button>
+              <Button type="submit" className="w-full bg-red-600 text-white hover:bg-red-700" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Abonnieren
+              </Button>
             </div>
           </form>
         </Form>

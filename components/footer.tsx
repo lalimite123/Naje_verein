@@ -99,16 +99,24 @@ export function Footer() {
                   </a>
                 </div>
               </li>
-              <li className="pt-3">
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-donation"))}
-                  className="px-5 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition-all duration-300"
-                >
-                  Spenden
-                </button>
-              </li>
-            </ul>
-          </div>
+          <li className="pt-3">
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent("open-donation"))}
+              className="px-5 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition-all duration-300"
+            >
+              Spenden
+            </button>
+          </li>
+          <li className="pt-2">
+            <a
+              href="/login"
+              className="px-5 py-2 inline-block rounded-full bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium transition-all duration-300"
+            >
+              Connexion
+            </a>
+          </li>
+        </ul>
+      </div>
         </div>
 
         {/* Bottom Section */}
